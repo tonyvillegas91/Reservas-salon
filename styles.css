@@ -1,0 +1,59 @@
+/* styles.css */
+
+body {
+    background: linear-gradient(to right, #66ccff, #99ffcc); /* Cambia los colores según tus preferencias */
+}
+
+.container {
+    margin-top: 50px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Roboto', sans-serif; /* Ajusta según la fuente que elijas */
+}
+
+.card {
+    max-width: 1000px; /* Ajusta el tamaño según tus preferencias */
+    margin: 0 auto;
+}
+
+form {
+    max-width: 300px; /* Ajusta el ancho según tus preferencias */
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333; /* Cambia el color del texto según tus preferencias */
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#mensajeReserva {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+}
