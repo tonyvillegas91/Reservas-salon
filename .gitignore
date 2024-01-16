@@ -3,7 +3,6 @@
 
 # Directorios y archivos generados por Composer
 /vendor
-/composer.lock
 
 # Archivos y directorios generados por el servidor web
 /public/assets
