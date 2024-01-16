@@ -9,7 +9,7 @@ function reservar() {
     var formData = new FormData(document.getElementById('reservaForm'));
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://tuservidor.herokuapp.com/procesar_reserva.php', true); // Reemplaza con la URL correcta de tu servidor
+    xhr.open('POST', 'https://shielded-ocean-39017.herokuapp.com/', true); // Asegúrate de que la URL sea correcta
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function () {
         if (xhr.status == 200) {
