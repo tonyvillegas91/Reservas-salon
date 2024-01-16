@@ -1,5 +1,5 @@
 <IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin "https://shielded-ocean-39017-ae1344eea549.herokuapp.com"
+    Header set Access-Control-Allow-Origin "hhttps://shielded-ocean-39017.herokuapp.com"
     Header set Access-Control-Allow-Methods "POST, GET, OPTIONS"
     Header set Access-Control-Allow-Headers "Content-Type"
 </IfModule>
