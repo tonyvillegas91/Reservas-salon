@@ -14,26 +14,23 @@ function reservar() {
     xhr.onload = function () {
         if (xhr.status == 200) {
             try {
-                // Intenta analizar la respuesta como JSON
                 var response = JSON.parse(xhr.responseText);
 
-                // Verifica si hay un mensaje en la respuesta
+                // Muestra el mensaje o el error
                 if (response.mensaje) {
-                    document.getElementById('mensajeReserva').innerHTML = response.mensaje;
+                    alert(response.mensaje);
                 } else if (response.error) {
-                    // Si no hay mensaje, verifica si hay un error
-                    document.getElementById('mensajeReserva').innerHTML = 'Error: ' + response.error;
+                    alert('Error: ' + response.error);
                 } else {
-                    // Manejo de otros casos si es necesario
-                    document.getElementById('mensajeReserva').innerHTML = 'Respuesta inesperada';
+                    alert('Respuesta inesperada');
                 }
             } catch (error) {
                 // Si no se puede analizar como JSON, trata la respuesta como texto simple
-                document.getElementById('mensajeReserva').innerHTML = xhr.responseText;
+                alert(xhr.responseText);
             }
         } else {
             // Si la solicitud no fue exitosa, muestra el mensaje de error
-            document.getElementById('mensajeReserva').innerHTML = 'Error en la solicitud: ' + xhr.statusText;
+            alert('Error en la solicitud: ' + xhr.statusText);
         }
     };
 
