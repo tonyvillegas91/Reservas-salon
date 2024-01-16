@@ -21,8 +21,12 @@ function reservar() {
                 // Si no se puede analizar como JSON, trata la respuesta como texto simple
                 document.getElementById('mensajeReserva').innerHTML = xhr.responseText;
             }
+        } else {
+            // Si la solicitud no fue exitosa, muestra el mensaje de error
+            document.getElementById('mensajeReserva').innerHTML = 'Error en la solicitud: ' + xhr.statusText;
         }
     };
     xhr.send(formData);
 }
+
 
