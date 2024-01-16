@@ -12,10 +12,10 @@ function reservar() {
     xhr.open('POST', 'https://shielded-ocean-39017-ae1344eea549.herokuapp.com/procesar_reserva.php', true);
 
     xhr.onload = function () {
-        if (xhr.status == 200) {
+        if (xhr.status >= 200 && xhr.status < 300) {
             try {
                 var response = JSON.parse(xhr.responseText);
-
+    
                 // Muestra el mensaje o el error
                 if (response.mensaje) {
                     alert(response.mensaje);
@@ -30,7 +30,7 @@ function reservar() {
             }
         } else {
             // Si la solicitud no fue exitosa, muestra el mensaje de error
-            alert('Error en la solicitud: ' + xhr.statusText);
+            alert('Error en la solicitud. Código de estado: ' + xhr.status);
         }
     };
 
