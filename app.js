@@ -10,12 +10,10 @@ function reservar() {
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://shielded-ocean-39017-ae1344eea549.herokuapp.com/procesar_reserva.php', true);
-    // No establezcas manualmente el Content-Type aquí para que el navegador lo maneje automáticamente
 
     xhr.onload = function () {
         if (xhr.status == 200) {
             try {
-                // Intenta analizar la respuesta como JSON
                 var response = JSON.parse(xhr.responseText);
                 document.getElementById('mensajeReserva').innerHTML = response;
             } catch (error) {
@@ -27,5 +25,7 @@ function reservar() {
             document.getElementById('mensajeReserva').innerHTML = 'Error en la solicitud: ' + xhr.statusText;
         }
     };
+
+    // No establezcas manualmente el Content-Type aquí para que el navegador lo maneje automáticamente
     xhr.send(formData);
 }
