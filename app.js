@@ -9,10 +9,16 @@ function reservar() {
     var formData = new FormData(document.getElementById('reservaForm'));
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'procesar_reserva.php', true);
+    xhr.open('POST', 'https://tuservidor.herokuapp.com/procesar_reserva.php', true); // Reemplaza con la URL correcta de tu servidor
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function () {
         if (xhr.status == 200) {
-            document.getElementById('mensajeReserva').innerHTML = xhr.responseText;
+            try {
+                var response = JSON.parse(xhr.responseText);
+                document.getElementById('mensajeReserva').innerHTML = response;
+            } catch (error) {
+                console.error("Error al procesar la respuesta JSON:", error);
+            }
         }
     };
     xhr.send(formData);
