@@ -16,7 +16,17 @@ function reservar() {
             try {
                 // Intenta analizar la respuesta como JSON
                 var response = JSON.parse(xhr.responseText);
-                document.getElementById('mensajeReserva').innerHTML = response;
+
+                // Verifica si hay un mensaje en la respuesta
+                if (response.mensaje) {
+                    document.getElementById('mensajeReserva').innerHTML = response.mensaje;
+                } else if (response.error) {
+                    // Si no hay mensaje, verifica si hay un error
+                    document.getElementById('mensajeReserva').innerHTML = 'Error: ' + response.error;
+                } else {
+                    // Manejo de otros casos si es necesario
+                    document.getElementById('mensajeReserva').innerHTML = 'Respuesta inesperada';
+                }
             } catch (error) {
                 // Si no se puede analizar como JSON, trata la respuesta como texto simple
                 document.getElementById('mensajeReserva').innerHTML = xhr.responseText;
