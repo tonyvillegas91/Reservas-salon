@@ -1,0 +1,13 @@
+# Archivos generados por el sistema operativo
+.DS_Store
+
+# Directorios y archivos generados por Composer
+/vendor
+/composer.lock
+
+# Archivos y directorios generados por el servidor web
+/public/assets
+
+# Otros archivos y directorios que no deben estar en el control de versiones
+/config/local.ini
+/node_modules
