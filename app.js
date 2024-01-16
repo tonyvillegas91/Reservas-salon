@@ -14,6 +14,7 @@ function reservar() {
     xhr.onload = function () {
         if (xhr.status == 200) {
             try {
+                // Intenta analizar la respuesta como JSON
                 var response = JSON.parse(xhr.responseText);
                 document.getElementById('mensajeReserva').innerHTML = response;
             } catch (error) {

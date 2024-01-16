@@ -10,8 +10,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Procesar la reserva como antes
 
-    $response = "¡Reserva exitosa! Se ha enviado una confirmación a tu correo electrónico y al administrador del sitio.";
+    $response = array(
+        'mensaje' => '¡Reserva exitosa! Se ha enviado una confirmación a tu correo electrónico y al administrador del sitio.',
+        'error' => null  // No hay error en este caso
+    );
+
     echo json_encode($response);
 } else {
-    echo json_encode("Error: Método no permitido");
+    $response = array(
+        'mensaje' => null,
+        'error' => 'Error: Método no permitido'
+    );
+
+    echo json_encode($response);
 }
