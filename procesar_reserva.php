@@ -23,48 +23,30 @@ function enviarCorreo($nombre, $correo) {
         $mail->isSMTP();
         $mail->Host = 'smtp.live.com'; // Puedes probar también con 'smtp.outlook.com'
         $mail->SMTPAuth = true;
-        $mail->Username = 'pythontutor2021@outlook.com';
+        $mail->Username = 'tonyvillegas91@hotmail.com';
         $mail->Password = 'tony271191';
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
-        // Aumentar el nivel de depuración
-        $mail->SMTPDebug = 3;
+        // Habilitar el modo de depuración
+        $mail->SMTPDebug = 2;
 
-        // Intentar conectarse al servidor SMTP varias veces
-        for ($intentos = 1; $intentos <= 3; $intentos++) {
-            try {
-                // Configuración del remitente y destinatario
-                $mail->setFrom('pythontutor2021@outlook.com', 'Tony Villegas Brea');
-                $mail->addAddress($correo, $nombre); // $correo y $nombre son variables obtenidas del formulario
+        // Configuración del remitente y destinatario
+        $mail->setFrom('tonyvillegas91@hotmail.com', 'Tony Villegas Brea');
+        $mail->addAddress($correo, $nombre); // $correo y $nombre son variables obtenidas del formulario
 
-                // Contenido del correo
-                $mail->isHTML(true);
-                $mail->Subject = 'Confirmación de Reserva';
-                $mail->Body = 'Gracias por tu reserva.';
+        // Contenido del correo
+        $mail->isHTML(true);
+        $mail->Subject = 'Confirmación de Reserva';
+        $mail->Body = 'Gracias por tu reserva.';
 
-                // Antes de iniciar la conexión SMTP
-                error_log('Antes de iniciar la conexión SMTP');
+        // Establecer un tiempo de espera para la conexión SMTP
+        $mail->Timeout = 25;
 
-                // Enviar el correo
-                $mail->send();
-
-                // Después de enviar el correo
-                error_log('Correo enviado exitosamente');
-                
-                return true; // Éxito, salimos de la función
-            } catch (Exception $e) {
-                // Intentar de nuevo después de un breve intervalo
-                sleep(1);
-            }
-        }
-
-        // Si llegamos aquí, todos los intentos fallaron
-        error_log('Error al enviar el correo: No se pudo conectar al servidor SMTP después de varios intentos');
-        throw new Exception('Error al enviar el correo: No se pudo conectar al servidor SMTP después de varios intentos');
+        // Enviar el correo
+        $mail->send();
     } catch (Exception $e) {
         // Lanzar excepción para manejar errores fuera de esta función
-        error_log('Error al enviar el correo: ' . $e->getMessage());
         throw new Exception('Error al enviar el correo: ' . $e->getMessage());
     }
 }
