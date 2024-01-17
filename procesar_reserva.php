@@ -69,3 +69,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     http_response_code(400); // Código de error por método no permitido
     echo json_encode($response);
 }
+// prueba
