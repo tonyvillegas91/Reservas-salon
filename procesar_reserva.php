@@ -31,26 +31,37 @@ function enviarCorreo($nombre, $correo) {
         // Aumentar el nivel de depuración
         $mail->SMTPDebug = 3;
 
-        // Configuración del remitente y destinatario
-        $mail->setFrom('tonyvillegas91@hotmail.com', 'Tony Villegas Brea');
-        $mail->addAddress($correo, $nombre); // $correo y $nombre son variables obtenidas del formulario
+        // Intentar conectarse al servidor SMTP varias veces
+        for ($intentos = 1; $intentos <= 3; $intentos++) {
+            try {
+                // Configuración del remitente y destinatario
+                $mail->setFrom('tonyvillegas91@hotmail.com', 'Tony Villegas Brea');
+                $mail->addAddress($correo, $nombre); // $correo y $nombre son variables obtenidas del formulario
 
-        // Contenido del correo
-        $mail->isHTML(true);
-        $mail->Subject = 'Confirmación de Reserva';
-        $mail->Body = 'Gracias por tu reserva.';
+                // Contenido del correo
+                $mail->isHTML(true);
+                $mail->Subject = 'Confirmación de Reserva';
+                $mail->Body = 'Gracias por tu reserva.';
 
-        // Antes de iniciar la conexión SMTP
-        error_log('Antes de iniciar la conexión SMTP');
+                // Antes de iniciar la conexión SMTP
+                error_log('Antes de iniciar la conexión SMTP');
 
-        // Inmediatamente después de la configuración SMTP
-        error_log('Configuración SMTP realizada');
+                // Enviar el correo
+                $mail->send();
 
-        // Enviar el correo
-        $mail->send();
+                // Después de enviar el correo
+                error_log('Correo enviado exitosamente');
+                
+                return true; // Éxito, salimos de la función
+            } catch (Exception $e) {
+                // Intentar de nuevo después de un breve intervalo
+                sleep(1);
+            }
+        }
 
-        // Después de enviar el correo
-        error_log('Correo enviado exitosamente');
+        // Si llegamos aquí, todos los intentos fallaron
+        error_log('Error al enviar el correo: No se pudo conectar al servidor SMTP después de varios intentos');
+        throw new Exception('Error al enviar el correo: No se pudo conectar al servidor SMTP después de varios intentos');
     } catch (Exception $e) {
         // Lanzar excepción para manejar errores fuera de esta función
         error_log('Error al enviar el correo: ' . $e->getMessage());
