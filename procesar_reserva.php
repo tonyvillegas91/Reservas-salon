@@ -24,7 +24,10 @@ function enviarCorreo($nombre, $correo) {
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
-        $mail->SMTPDebug = 2; // Desactiva el modo de depuración en producción
+        $mail->SMTPDebug = 0; // Desactiva el modo de depuración en producción
+
+        // Agregamos líneas para imprimir el valor de SMTP_USERNAME en los registros
+        error_log('SMTP_USERNAME: ' . getenv('SMTP_USERNAME'));
 
         $mail->setFrom(getenv('SMTP_USERNAME'), 'Tony Villegas Brea');
         $mail->addAddress($correo, $nombre);
