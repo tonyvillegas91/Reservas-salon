@@ -1,8 +1,16 @@
 {
-    "require": {
+  "require": {
       "php": "^8.0",
       "ext-mbstring": "*",
-      "ext-openssl": "*"
-    }
+      "ext-openssl": "*",
+      "phpmailer/phpmailer": "^6.4"
+  },
+  "config": {
+      "platform": {
+          "php": "8.0"
+      }
+  },
+  "scripts": {
+      "timeout": 25
   }
-  
+}
