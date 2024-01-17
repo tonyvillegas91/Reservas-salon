@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         // Configuración del servidor SMTP para Hotmail/Outlook
         $mail->isSMTP();
-        $mail->Host = 'smtp.live.com'; // Puedes probar también con 'smtp.outlook.com'
+        $mail->Host = 'smtp.outlook.com'; // Puedes probar también con 'smtp.outlook.com'
         $mail->SMTPAuth = true;
         $mail->Username = 'tonyvillegas91@hotmail.com';
         $mail->Password = 'tony271191';
