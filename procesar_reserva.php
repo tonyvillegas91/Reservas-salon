@@ -23,7 +23,7 @@ function enviarCorreo($nombre, $correo) {
         $mail->isSMTP();
         $mail->Host = 'smtp.live.com'; // Puedes probar también con 'smtp.outlook.com'
         $mail->SMTPAuth = true;
-        $mail->Username = 'tonyvillegas91@hotmail.com';
+        $mail->Username = 'pythontutor2021@outlook.com';
         $mail->Password = 'tony271191';
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
@@ -35,7 +35,7 @@ function enviarCorreo($nombre, $correo) {
         for ($intentos = 1; $intentos <= 3; $intentos++) {
             try {
                 // Configuración del remitente y destinatario
-                $mail->setFrom('tonyvillegas91@hotmail.com', 'Tony Villegas Brea');
+                $mail->setFrom('pythontutor2021@outlook.com', 'Tony Villegas Brea');
                 $mail->addAddress($correo, $nombre); // $correo y $nombre son variables obtenidas del formulario
 
                 // Contenido del correo
