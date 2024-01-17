@@ -28,8 +28,8 @@ function enviarCorreo($nombre, $correo) {
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
-        // Habilitar el modo de depuración
-        $mail->SMTPDebug = 2;
+        // Aumentar el nivel de depuración
+        $mail->SMTPDebug = 3;
 
         // Configuración del remitente y destinatario
         $mail->setFrom('tonyvillegas91@hotmail.com', 'Tony Villegas Brea');
@@ -40,10 +40,20 @@ function enviarCorreo($nombre, $correo) {
         $mail->Subject = 'Confirmación de Reserva';
         $mail->Body = 'Gracias por tu reserva.';
 
+        // Antes de iniciar la conexión SMTP
+        error_log('Antes de iniciar la conexión SMTP');
+
+        // Inmediatamente después de la configuración SMTP
+        error_log('Configuración SMTP realizada');
+
         // Enviar el correo
         $mail->send();
+
+        // Después de enviar el correo
+        error_log('Correo enviado exitosamente');
     } catch (Exception $e) {
         // Lanzar excepción para manejar errores fuera de esta función
+        error_log('Error al enviar el correo: ' . $e->getMessage());
         throw new Exception('Error al enviar el correo: ' . $e->getMessage());
     }
 }
