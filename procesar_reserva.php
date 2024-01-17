@@ -1,52 +1,42 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+error_reporting(0);
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Incluye la clase de PHPMailer
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/SMTP.php';
 
 header('Content-Type: application/json');
 
-// Función para manejar el envío de correos electrónicos
 function enviarCorreo($nombre, $correo) {
-    // Configuración de PHPMailer
-    $mail = new PHPMailer(true); // Configuración para lanzar excepciones en caso de error
+    $mail = new PHPMailer(true);
 
     try {
-        // Configuración del servidor SMTP para Hotmail/Outlook
         $mail->isSMTP();
-        $mail->Host = 'smtp.live.com'; // Puedes probar también con 'smtp.outlook.com'
+        $mail->Host = 'smtp.live.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'tonyvillegas91@hotmail.com';
-        $mail->Password = 'tony271191';
+        $mail->Username = getenv('SMTP_USERNAME'); // Configura esta variable de entorno
+        $mail->Password = getenv('SMTP_PASSWORD'); // Configura esta variable de entorno
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
-        // Habilitar el modo de depuración
-        $mail->SMTPDebug = 2;
+        $mail->SMTPDebug = 0; // Desactiva el modo de depuración en producción
 
-        // Configuración del remitente y destinatario
-        $mail->setFrom('tonyvillegas91@hotmail.com', 'Tony Villegas Brea');
-        $mail->addAddress($correo, $nombre); // $correo y $nombre son variables obtenidas del formulario
+        $mail->setFrom(getenv('SMTP_USERNAME'), 'Tony Villegas Brea');
+        $mail->addAddress($correo, $nombre);
 
-        // Contenido del correo
         $mail->isHTML(true);
         $mail->Subject = 'Confirmación de Reserva';
         $mail->Body = 'Gracias por tu reserva.';
 
-        // Establecer un tiempo de espera para la conexión SMTP
         $mail->Timeout = 25;
 
-        // Enviar el correo
         $mail->send();
     } catch (Exception $e) {
-        // Lanzar excepción para manejar errores fuera de esta función
         throw new Exception('Error al enviar el correo: ' . $e->getMessage());
     }
 }
@@ -57,30 +47,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fecha = $_POST["fecha"];
     $hora = $_POST["hora"];
 
-    // Procesar la reserva como antes
-
-    $response = array(
+    $response = [
         'mensaje' => '¡Reserva exitosa! Se ha enviado una confirmación a tu correo electrónico y al administrador del sitio.',
-        'error' => null // No hay error en este caso
-    );
+        'error' => null
+    ];
 
     try {
-        // Llamar a la función para enviar el correo electrónico
         enviarCorreo($nombre, $correo);
     } catch (Exception $e) {
-        // Manejar errores de envío de correo
         $response['error'] = $e->getMessage();
     }
 
     http_response_code(200);
     echo json_encode($response);
 } else {
-    $response = array(
+    $response = [
         'mensaje' => null,
         'error' => 'Error: Método no permitido'
-    );
+    ];
 
-    http_response_code(400); // Código de error por método no permitido
+    http_response_code(400);
     echo json_encode($response);
 }
 ?>
