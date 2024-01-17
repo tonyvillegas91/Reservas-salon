@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->Port = 587;
 
         // Configuración del remitente y destinatario
-        $mail->setFrom('tonyvillegas91@hotmail.com', 'TOny Villegas Brea');
+        $mail->setFrom('tonyvillegas91@hotmail.com', 'Tony Villegas Brea');
         $mail->addAddress($correo, $nombre); // $correo y $nombre son variables obtenidas del formulario
 
         // Contenido del correo
