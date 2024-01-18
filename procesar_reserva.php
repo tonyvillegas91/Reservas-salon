@@ -3,6 +3,11 @@ ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// Agrega las líneas de cabeceras CORS
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -21,8 +26,8 @@ function enviarCorreo($nombre, $correo) {
         $mail->SMTPAuth = true;
         $mail->Username = getenv('SMTP_USERNAME'); // Configura esta variable de entorno
         $mail->Password = getenv('SMTP_PASSWORD'); // Configura esta variable de entorno
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port = 465;
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
 
         $mail->SMTPDebug = 3; // Desactiva el modo de depuración en producción
 
