@@ -21,8 +21,8 @@ function enviarCorreo($nombre, $correo) {
         $mail->SMTPAuth = true;
         $mail->Username = getenv('SMTP_USERNAME'); // Configura esta variable de entorno
         $mail->Password = getenv('SMTP_PASSWORD'); // Configura esta variable de entorno
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
 
         $mail->SMTPDebug = 3; // Desactiva el modo de depuración en producción
 
