@@ -22,7 +22,7 @@ function enviarCorreo($nombre, $correo) {
 
     try {
         $mail->isSMTP();
-        $mail->Host = 'smtp.live.com';
+        $mail->Host = 'smtp.outlook.com';
         $mail->SMTPAuth = true;
         $mail->Username = getenv('SMTP_USERNAME'); // Configura esta variable de entorno
         $mail->Password = getenv('SMTP_PASSWORD'); // Configura esta variable de entorno
