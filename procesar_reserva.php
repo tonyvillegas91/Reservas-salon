@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // Agrega las líneas de cabeceras CORS
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: https://shielded-ocean-39017-ae1344eea549.herokuapp.com/");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
@@ -22,7 +22,7 @@ function enviarCorreo($nombre, $correo) {
 
     try {
         $mail->isSMTP();
-        $mail->Host = 'smtp.outlook.com';
+        $mail->Host = 'smtp.live.com';
         $mail->SMTPAuth = true;
         $mail->Username = getenv('SMTP_USERNAME'); // Configura esta variable de entorno
         $mail->Password = getenv('SMTP_PASSWORD'); // Configura esta variable de entorno
